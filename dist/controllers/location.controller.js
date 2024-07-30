@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSingleLocation = exports.getAllLocations = void 0;
+exports.addLocation = exports.getSingleLocation = exports.getAllLocations = void 0;
 const location_models_1 = require("../models/location.models");
 // GET all products
 const getAllLocations = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,3 +39,28 @@ const getSingleLocation = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getSingleLocation = getSingleLocation;
+// ADD a location
+const addLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id, locationName, mainImage, description, images, videos, locationFacts } = req.body;
+        if (!id || !locationName || !mainImage || !description || !images || !videos || !locationFacts) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+        const newLocation = new location_models_1.LocationModel({
+            _id: id,
+            locationName,
+            mainImage,
+            description,
+            images,
+            videos,
+            locationFacts,
+        });
+        const savedLocation = yield newLocation.save();
+        res.status(201).json(savedLocation);
+    }
+    catch (error) {
+        console.error('Error adding location:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+exports.addLocation = addLocation;

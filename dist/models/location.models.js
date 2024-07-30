@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const LocationSchema = new mongoose_1.Schema({
-    id: { type: String, required: true, unique: true },
+    _id: { type: String, required: true }, // Use your custom id as the _id field
     locationName: { type: String, required: true },
     mainImage: { type: String, required: true },
     description: { type: String, required: true },

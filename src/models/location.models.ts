@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 interface LocationDocument extends Document {
-    id: string;
+    _id: string;
     locationName: string;
     mainImage: string;
     description: string;
@@ -11,7 +11,7 @@ interface LocationDocument extends Document {
 }
 
 const LocationSchema = new Schema<LocationDocument>({
-    id: { type: String, required: true, unique: true },
+    _id: { type: String, required: true }, // Use your custom id as the _id field
     locationName: { type: String, required: true },
     mainImage: { type: String, required: true },
     description: { type: String, required: true },
