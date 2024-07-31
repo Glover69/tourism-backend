@@ -26,8 +26,10 @@ exports.getAllLocations = getAllLocations;
 // GET a location based on its ID
 const getSingleLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = req.params;
-        const location = yield location_models_1.LocationModel.findById(id);
+        // const { id } = req.params;
+        const id = req.params.id;
+        const query = { id: id };
+        const location = yield location_models_1.LocationModel.findOne(query);
         if (!location) {
             return res.status(404).json({ error: 'Location not found' });
         }
